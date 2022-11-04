@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import { useRef, useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const refElement = useRef('');
+	console.log(refElement);
+	const [name, setName] = useState('Praharsh');
+
+	function Reset() {
+		setName('');
+		refElement.current.focus();
+	}
+
+	const handleInput = () => {
+		refElement.current.style.color = 'blue';
+	};
+
+	return (
+		<div className='App'>
+			<h1>useRef</h1>
+			<input
+				type='text'
+				ref={refElement}
+				value={name}
+				onChange={(e) => setName(e.target.value)}
+			/>
+			<button onClick={Reset}>Reset</button>
+
+			{/* 2nd example  */}
+			<button onClick={handleInput}>Color Change</button>
+		</div>
+	);
 }
 
 export default App;
